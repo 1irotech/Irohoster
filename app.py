@@ -17,11 +17,13 @@ bot_processes = {}
 bot_states = {}
 
 # Owner credentials
-OWNER_PASSWORD = 'bajsal101'  # Change this to a secure password
+OWNER_PASSWORD = 'bajsal11'  # Change this to a secure password
 
 @app.route('/')
-def home():
-    return render_template('login.html')
+def home_page():  # Renamed the function to avoid conflict
+    if 'username' in session:
+        return render_template('home.html')  # Render the home page if logged in
+    return render_template('login.html')  # Otherwise, show the login page
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -35,7 +37,7 @@ def register():
         
         users[username] = password  # Store the username and password
         flash('Registration successful! You can now log in.')
-        return redirect(url_for('home'))
+        return redirect(url_for('home_page'))  # Updated to match the new function name
     
     return render_template('register.html')
 
@@ -49,12 +51,12 @@ def login():
         return redirect(url_for('upload'))
     
     flash('Invalid credentials. Please try again.')
-    return redirect(url_for('home'))
+    return redirect(url_for('home_page'))  # Updated to match the new function name
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
     if 'username' not in session:
-        return redirect(url_for('home'))
+        return redirect(url_for('home_page'))
 
     if request.method == 'POST':
         if 'file' not in request.files:
@@ -83,7 +85,7 @@ def upload():
 @app.route('/manage_bots')
 def manage_bots():
     if 'username' not in session:
-        return redirect(url_for('home'))
+        return redirect(url_for('home_page'))
 
     return render_template('manage_bots.html', bots=bot_processes.keys(), states=bot_states)
 
@@ -110,13 +112,7 @@ def restart_bot(bot_name):
 @app.route('/logout')
 def logout():
     session.pop('username', None)
-    return redirect(url_for('home'))
-
-@app.route('/')
-def home():
-    if 'username' in session:
-        return render_template('home.html')  # Render the home page if logged in
-    return render_template('login.html')  # Otherwise, show the login page
+    return redirect(url_for('home_page'))
 
 @app.route('/owner_panel', methods=['GET', 'POST'])
 def owner_panel():
@@ -128,7 +124,7 @@ def owner_panel():
             return render_template('owner_panel.html', user_count=user_count, users=users)
         else:
             flash('Incorrect password. Access denied.')
-            return redirect(url_for('home'))
+            return redirect(url_for('home_page'))
 
     return render_template('owner_login.html')
 
@@ -139,9 +135,7 @@ def delete_user(username):
         flash(f'User  {username} has been deleted.')
     else:
         flash('User  not found.')
-    return redirect(url_for('owner _panel'))
-
-
+    return redirect(url_for('owner_panel'))
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000, debug=True)  # Fixed the non-printable character and typo
+    app.run(host="0.0.0.0", port=5000, debug=True)  # Set host and port
