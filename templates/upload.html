@@ -3,58 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Upload Bot Script</title>
-    <style>
-        body {
-            background-color: black;
-            color: #ff0000; /* Neon red */
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 50px;
-        }
-        h1 {
-            text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000;
-        }
-        input[type="file"] {
-            padding: 10px;
-            margin: 10px;
-            border: 2px solid #ff0000;
-            border-radius: 5px;
-            background-color: black;
-            color: #ff0000;
-            font-size: 16px;
-            text-shadow: 0 0 5px #ff0000;
-        }
-        button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            background-color: #ff0000;
-            color: black;
-            font-size: 16px;
-            cursor: pointer;
-            text-shadow: 0 0 5px #ff0000;
-            transition: background-color 0.3s;
-        }
-        button:hover {
-            background-color: #cc0000; /* Darker red on hover */
-        }
-        a {
-            color: #ff0000;
-            text-decoration: none;
-            font-size: 14px;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <title>Upload Bot Script</title>
 </head>
 <body>
     <h1>Upload Bot Script</h1>
-    <form method="POST" action="/upload" enctype="multipart/form-data">
-        <input type="file" name="script" required>
-        <button type="submit">Upload</button>
+    <form method="POST" action="{{ url_for('upload') }}" enctype="multipart/form-data">
+        <label for="file">Select bot script:</label>
+        <input type="file" name="file" required> <!-- Ensure the name is 'file' -->
+        <input type="submit" value="Upload">
     </form>
-    <a href="/">Back to Home</a>
+    <a href="{{ url_for('logout') }}">Logout</a>
 </body>
 </html>
