@@ -3,49 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+ <title>Upload Bot Script</title>
     <style>
         body {
             background-color: black;
-            color: gold;
+            color: #ff0000; /* Neon red */
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
         }
-        .container {
-            margin-top: 100px;
-            background-color: #b22222; /* Dark red background */
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); /* Gold shadow */
+        h1 {
+            text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000;
         }
-        .form-label {
-            color: gold;
+        input[type="file"] {
+            padding: 10px;
+            margin: 10px;
+            border: 2px solid #ff0000;
+            border-radius: 5px;
+            background-color: black;
+            color: #ff0000;
+            font-size: 16px;
+            text-shadow: 0 0 5px #ff0000;
         }
-        .btn-success {
-            background-color: gold;
+        button {
+            padding: 10px 20px;
             border: none;
+            border-radius: 5px;
+            background-color: #ff0000;
+            color: black;
+            font-size: 16px;
+            cursor: pointer;
+            text-shadow: 0 0 5px #ff0000;
+            transition: background-color 0.3s;
         }
-        .btn-success:hover {
-            background-color: #ffd700; /* Lighter gold on hover */
+        button:hover {
+            background-color: #cc0000; /* Darker red on hover */
+        }
+        a {
+            color: #ff0000;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1 class="text-center">Upload Code</h1>
-        <form method="POST" enctype="multipart/form-data" class="mt-3">
-            {{ form.hidden_tag() }}
-            <div class="form-group">
-                {{ form.site_name.label(class="form-label") }} 
-                {{ form.site_name(class="form-control") }}
-            </div>
-            <div class="form-group">
-                {{ form.zip_file.label(class="form-label") }} 
-                {{ form.zip_file(class="form-control-file") }}
-            </div>
-            <div class="form-group">
-                {{ form.submit(class="btn btn-success btn-block") }}
-            </div>
-        </form>
-    </div>
+    <h1>Upload Bot Script</h1>
+    <form method="POST" action="/upload" enctype="multipart/form-data">
+        <input type="file" name="script" required>
+        <button type="submit">Upload</button>
+    </form>
+    <a href="/">Back to Home</a>
 </body>
 </html>
