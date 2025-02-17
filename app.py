@@ -81,7 +81,6 @@ def upload():
             return redirect(url_for('manage_bots'))
 
     return render_template('upload.html')
-
 @app.route('/manage_bots')
 def manage_bots():
     if 'username' not in session:
