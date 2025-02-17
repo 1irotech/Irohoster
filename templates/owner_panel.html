@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owner Panel</title>
+</head>
+<body>
+    <h1>Owner Panel</h1>
+    <h2>User Statistics</h2>
+    <p>Total Registered Users: {{ user_count }}</p>
+
+    <h2>Manage Users</h2>
+    <ul>
+        {% for username in users.keys() %}
+        <li>
+            {{ username }} 
+            <a href="{{ url_for('delete_user', username=username) }}">Delete User</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Bots</title>
+</head>
+<body>
+    <h1>Manage Your Bots</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Bot Name</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for bot in bots %}
+            <tr>
+                <td>{{ bot }}</td>
+                <td>{{ states[bot] }}</td>
+                <td>
+                    {% if states[bot] == 'running' %}
+                    <a href="{{ url_for('stop_bot', bot_name=bot) }}">Stop</a>
+                    {% else %}
+                    <a href="{{ url_for('restart_bot', bot_name=bot) }}">Restart</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>
