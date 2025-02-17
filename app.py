@@ -3,7 +3,7 @@ import subprocess
 import os
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # Change this to a random secret key
+app.secret_key = 'iroff1'  # Change this to a random secret key
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -74,4 +74,4 @@ def logout():
     return redirect(url_for('home'))
 
 if __name__ == '__main__':
-    app.run(debug=True)
+       app.run(host="0.0.0.0", port=5000, debug=True)
